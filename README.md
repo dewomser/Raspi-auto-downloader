@@ -1,2 +1,3 @@
 # Raspi-auto-downloader
-Load fresh images , check SHA256, an copy to SD-Card , a Bashscript
+Load fresh images for the Raspbeery 
+Pi, check SHA256, and copy to SD-Card , a Bashscript
