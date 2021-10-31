@@ -28,7 +28,7 @@ cd ~/Downloads || exit
 dirr=$(curl --silent https://downloads.raspberrypi.org/$rimage/images/ | grep -o -E "$rimage-[0-9]{4}-[0-9]{2}-[0-9]{2}" | tail -1 )
 pathr="https://downloads.raspberrypi.org/$rimage/images/$dirr/"
 rname=$(curl --silent "$pathr" | grep -o -E -w "[0-9]{4}-[0-9]{2}-[0-9]{2}-[[:lower:]-]*\.zip" | head -1)
-wget -erobots=off $pathr$rname -O raspi.zip
+wget -erobots=off "$pathr""$rname" -O raspi.zip
 #echo Test kompletter Pfad :: "$pathr""$rname"
 shaname=$(curl --silent "$pathr" | grep -o -E -w "[0-9]{4}-[0-9]{2}-[0-9]{2}-[[:lower:]-]*\.zip\.sha256" | head -1) 
 #echo Test kompletter sha256-Pfad :: $pathr$shaname
