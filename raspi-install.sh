@@ -29,12 +29,12 @@ fi
 #rimage ="raspios_lite_armhf"
 #rimage="raspios_full_armhf"
 
-cd ~/Downloads || exit
+cd "$HOME/Downloads" || exit
 
 dirr=$(curl --silent https://downloads.raspberrypi.org/$rimage/images/ | grep -o -E "$rimage-$datum" | tail -1 )
 pathr="https://downloads.raspberrypi.org/$rimage/images/$dirr/"
 rname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:lower:]-]*\.zip" | head -1)
-wget -erobots=off "$pathr""$rname" -O raspi.zip
+wget -c "$pathr""$rname" -O raspi.zip
 #echo Test kompletter Pfad :: "$pathr""$rname"
 shaname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:lower:]-]*\.zip\.sha256" | head -1) 
 #echo Test kompletter sha256-Pfad :: $pathr$shaname
@@ -64,8 +64,13 @@ if [ "$input" == "y" ];  then
 mapfile -t laufwerke1 < <(lsblk -l -o Name | grep -E -v "[0-9]" | grep -E "sd[a-z]")
 
 mapfile -t laufwerke2 < <({ printf "%s\n" "${laufwerke[@]}" | sort -u; printf "%s\n" "${laufwerke1[@]}" "${laufwerke[@]}"; } | sort | uniq -u)
-
+zahl_laufwerke="${#laufwerke2[@]}"
+echo neue Lafwerke "$zahl_laufwerke"
+if [ "$zahl_laufwerke" -eq 1 ]; then
 echo Es gibt jetzt dieses neue serielle Blockdevice: "${laufwerke2[0]}"
+else
+echo "Es kann nicht geschrieben werden. Es wurden mehr oder weniger als 1 SD-Karte erkannt" ;sleep 5; exit
+fi
 else
 exit
 fi
