@@ -6,7 +6,7 @@ Pi, check SHA256, and copy to SD-Card, a Bashscript.
 
 ## Hilfe raspi-install -h
 
-![alt text](https://github.com/dewomser/Raspi-auto-downloader/blob/main/bilder/help.png "help")
+![alt text](./bilder/help.png "help")
 
 
 ## Copy and check SD-Image
