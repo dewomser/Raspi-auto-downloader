@@ -30,7 +30,8 @@ fi
 #rimage ="raspios_lite_armhf"
 #rimage="raspios_full_armhf"
 
-cd "$HOME/Downloads" || exit
+cd "$HOME/Downloads" || echo"Downloads Ordner nicht vorhanden"
+
 
 dirr=$(curl --silent https://downloads.raspberrypi.org/$rimage/images/ | grep -o -E "$rimage-$datum" | tail -1 )
 pathr="https://downloads.raspberrypi.org/$rimage/images/$dirr/"
