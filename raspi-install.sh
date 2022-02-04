@@ -53,17 +53,14 @@ cd "$HOME/Downloads" || echo"Downloads Ordner nicht vorhanden"
 
 
 dirr=$(curl --silent https://downloads.raspberrypi.org/$rimage/images/ | grep -o -E "$rimage-$datum" | tail -1 )
-echo dirr :: $dirr
 pathr="https://downloads.raspberrypi.org/$rimage/images/$dirr/"
-echo pathr :: $pathr
 #rname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:lower:]-]*\.zip" | head -1)
 rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.zip" | head -1)
 
-echo rname :: $rname
 wget -c "$pathr""$rname" -O "raspi$attribut".zip
-echo Test kompletter Pfad :: "$pathr""$rname"
+#echo Test kompletter Pfad :: "$pathr""$rname"
 shaname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:alnum:]-]*\.zip\.sha256" | head -1) 
-echo Test kompletter sha256-Pfad :: $pathr$shaname
+#echo Test kompletter sha256-Pfad :: $pathr$shaname
 wget "$pathr""$shaname" -O raspi"$attribut".sha256
 echo "Bitte ein paar Sekunden warten. Der Hash wird erzeugt."
 sha1=$(shasum -a 256 raspi"$attribut".zip | grep -o -P "[0-9a-z]{40,}")
