@@ -109,11 +109,11 @@ if [ "$endgueltigja" == "y" ]; then
 # Quelle : https://askubuntu.com/questions/828545/using-dd-without-sudo
 
 # Wenn die nächsten 3 Zeilen aktiviert sind: "don't blame me!"
-umount /dev/${laufwerke2[0]}[0-9]
+umount /dev/"${laufwerke2[0]}"[0-9]
 echo "Fehler umount … nicht eingehängt oder nicht gefunden ist nicht schlimm."
-unzip -p raspi$attribut.zip | dd of=/dev/${laufwerke2[0]} bs=4M conv=fsync status=progress || echo "Es gibt Probleme, Ab Zeile 105 gibts Hilfe"
+unzip -p raspi"$attribut".zip | dd of=/dev/"${laufwerke2[0]}" bs=4M conv=fsync status=progress || echo "Es gibt Probleme, Ab Zeile 105 gibts Hilfe"
 echo "Tatatatah ! fertig"
-umount /dev/${laufwerke2[0]}[0-9]
+umount /dev/"${laufwerke2[0]}"[0-9]
 else
 exit
 fi
