@@ -6,7 +6,7 @@ Pi, check SHA256, and copy to SD-Card, a Bashscript.
 
 Jetzt auch mit den 64er Images
 
-## Hilfe raspi-install -h
+## Hilfe raspi-install.sh -h
 
 ![alt text](./bilder/help.png "help")
 
