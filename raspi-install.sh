@@ -1,7 +1,7 @@
 #!/bin/bash
 # gemacht von Stefan Höhn
 #https://github.com/dewomser/Raspi-auto-downloader
-
+#ACHTUNG : Zeile 106-112 Beachten !
 attribut=$1
 datum="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 
@@ -102,9 +102,18 @@ echo Ich bin mir SICHER und will auf SD-Karte schreiben : /dev/"${laufwerke2[0]}
 
 read -r endgueltigja
 if [ "$endgueltigja" == "y" ]; then
-# das hier aktivieren --TOTENKOPF--- zum Schreiben
-unzip -p raspi"attribut".zip | dd of=/dev/${laufwerke2[0]} bs=4M conv=fsync status=progress
+
+# Wenn die Karte nur als root gemountet werden kann, muss dd durch sudo dd ersetzt werden. umount -> sudo umount
+# Alternative für Ubuntu:
+# echo 'KERNEL=="sd*", SUBSYSTEMS=="usb", MODE="0666"' | sudo tee /etc/udev/rules.d/99-usb-storage.rules
+# Quelle : https://askubuntu.com/questions/828545/using-dd-without-sudo
+
+# Wenn die nächsten 3 Zeilen aktiviert sind: "don't blame me!"
+umount /dev/${laufwerke2[0]}[0-9]
+echo "Fehler umount … nicht eingehängt oder nicht gefunden ist nicht schlimm."
+unzip -p raspi$attribut.zip | dd of=/dev/${laufwerke2[0]} bs=4M conv=fsync status=progress || echo "Es gibt Probleme, Ab Zeile 105 gibts Hilfe"
 echo "Tatatatah ! fertig"
+umount /dev/${laufwerke2[0]}[0-9]
 else
 exit
 fi
