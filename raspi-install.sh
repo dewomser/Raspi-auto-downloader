@@ -103,7 +103,7 @@ echo Ich bin mir SICHER und will auf SD-Karte schreiben : /dev/"${laufwerke2[0]}
 read -r endgueltigja
 if [ "$endgueltigja" == "y" ]; then
 # das hier aktivieren --TOTENKOPF--- zum Schreiben
-#unzip -p raspi"attribut".zip | dd of=/dev/${laufwerke2[0]} bs=4M conv=fsync status=progress
+unzip -p raspi"attribut".zip | dd of=/dev/${laufwerke2[0]} bs=4M conv=fsync status=progress
 echo "Tatatatah ! fertig"
 else
 exit
