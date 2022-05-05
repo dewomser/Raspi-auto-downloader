@@ -4,7 +4,7 @@
 #ACHTUNG : Zeile 106-112 Beachten !
 attribut=$1
 datum="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-
+zipp="xz"
 
 if [[ "$attribut" = "-h" ]]
 then
@@ -55,15 +55,16 @@ cd "$HOME/Downloads" || echo"Downloads Ordner nicht vorhanden"
 dirr=$(curl --silent https://downloads.raspberrypi.org/$rimage/images/ | grep -o -E "$rimage-$datum" | tail -1 )
 pathr="https://downloads.raspberrypi.org/$rimage/images/$dirr/"
 #rname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:lower:]-]*\.zip" | head -1)
-rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.zip" | head -1)
+#rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.xz" | head -1)
+rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.img.\xz"|tail -1)
 
-wget -c "$pathr""$rname" -O "raspi$attribut".zip
+wget -c "$pathr""$rname" -O "raspi$attribut".xz
 #echo Test kompletter Pfad :: "$pathr""$rname"
-shaname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:alnum:]-]*\.zip\.sha256" | head -1) 
+shaname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:alnum:]-]*\.img.\xz\.sha256" | tail -1)
 #echo Test kompletter sha256-Pfad :: $pathr$shaname
 wget "$pathr""$shaname" -O raspi"$attribut".sha256
 echo "Bitte ein paar Sekunden warten. Der Hash wird erzeugt."
-sha1=$(shasum -a 256 raspi"$attribut".zip | grep -o -P "[0-9a-z]{40,}")
+sha1=$(shasum -a 256 raspi"$attribut".xz | grep -o -P "[0-9a-z]{40,}")
 sha2=$( grep -o -P "[0-9a-z]{40,}" < raspi"$attribut".sha256 )
 sleep 1
 echo Prüfsumme aus Download "$sha1"
@@ -110,7 +111,7 @@ if [ "$endgueltigja" == "y" ]; then
 
 # Wenn die nächsten 3 Zeilen aktiviert sind: "don't blame me!"
 umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
-unzip -p raspi"$attribut".zip | dd of=/dev/"${laufwerke2[0]}" bs=4M conv=fsync status=progress || echo "Es gibt Probleme mit Schreibrechten.Ab Zeile 105 gibts Hilfe"
+xz --keep --decompress raspi"$attribut".xz | dd of=/dev/"${laufwerke2[0]}" bs=4M conv=fsync status=progress || echo "Es gibt Probleme mit Schreibrechten.Ab Zeile 105 gibts Hilfe"
 echo "Tatatatah ! fertig"
 umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
 else
