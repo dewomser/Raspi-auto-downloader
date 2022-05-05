@@ -4,7 +4,6 @@
 #ACHTUNG : Zeile 106-112 Beachten !
 attribut=$1
 datum="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-zipp="xz"
 
 if [[ "$attribut" = "-h" ]]
 then
