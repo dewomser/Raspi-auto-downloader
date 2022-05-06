@@ -1,7 +1,12 @@
 # Raspi-auto-downloader 
 
-# Achtung ! Nur teilweise getestet.
+
 05.05.2022 Diese Version kann jetzt Images die mit xz gepackt wurden.
+
+Was ich bisher getestet habe:
+1. Raspbian Light: download; hash-check; SD
+2. Raspbian Light 64;download; hash-check
+3. Bei den restlichen Raspberry-Images hab ich nur den Download angestoßen. Hat funktioniert.
 
 
 .[![Trigger: Push action](https://github.com/dewomser/Raspi-auto-downloader/actions/workflows/main.yml/badge.svg)](https://github.com/dewomser/Raspi-auto-downloader/actions/workflows/main.yml) Shellchecked
@@ -21,7 +26,7 @@ Jetzt auch mit den 64er Images
 ![alt text](https://github.com/dewomser/Raspi-auto-downloader/blob/main/bilder/copy.png "copy and check")
 
 ## Fork, Issue, Pull request, Clone
-Be carefull, this  script is in status Beta 0.2. !
+Be carefull, this  script is in status Beta 0.3 !
 
 ## Bei fehlenden Rootrechten zum Schreiben auf SD-Karte
 
