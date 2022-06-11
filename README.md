@@ -3,7 +3,6 @@
 Load fresh images for the Raspberry 
 Pi, check SHA256, and copy to SD-Card, a Bashscript.
 
-## 05.05.2022 Diese Version kann Images, die jetzt mit xz und nicht mehr mit zip gepackt wurden.
 
 Was ich bisher getestet habe:
 1. Raspbian Light: download; hash-check; SD
