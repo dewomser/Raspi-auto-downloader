@@ -87,7 +87,7 @@ echo "SD-Karte auf die geschrieben werden soll EINSCHIEBEN !" \"y\"
 read -r input
 if [ "$input" == "y" ];  then
 mapfile -t laufwerke1 < <(lsblk -l -o Name |grep -E "^sd[a-z]*$")
-echo "$laufwerke1[0]"
+echo "${laufwerke1[0]}"
 mapfile -t laufwerke2 < <({ printf "%s\n" "${laufwerke[@]}" | sort -u; printf "%s\n" "${laufwerke1[@]}" "${laufwerke[@]}"; } | sort | uniq -u)
 zahl_laufwerke="${#laufwerke2[@]}"
 
