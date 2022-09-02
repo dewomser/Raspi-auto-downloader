@@ -75,7 +75,9 @@ echo "-----------------"
 echo "SD-Karte auf die geschrieben werden soll ENTFERNEN !" \"y\"
 read -r input
 if [ "$input" == "y" ];  then
-mapfile -t laufwerke < <(lsblk -l -o Name | grep -E -v "[0-9]" | grep -E "sd[a-z]")
+mapfile -t laufwerke < <(lsblk -l -o Name | grep -E "^sd[a-z]*$")
+laufwerke[0]="lolo"
+laufwerke1[0]="lolo"
 else
 exit
 fi
@@ -84,11 +86,19 @@ echo Es gibt diese seriellen Blockdevices "${laufwerke[*]}"
 echo "SD-Karte auf die geschrieben werden soll EINSCHIEBEN !" \"y\"
 read -r input
 if [ "$input" == "y" ];  then
-mapfile -t laufwerke1 < <(lsblk -l -o Name | grep -E -v "[0-9]" | grep -E "sd[a-z]")
-
+mapfile -t laufwerke1 < <(lsblk -l -o Name |grep -E "^sd[a-z]*$")
+echo "$laufwerke1[0]"
 mapfile -t laufwerke2 < <({ printf "%s\n" "${laufwerke[@]}" | sort -u; printf "%s\n" "${laufwerke1[@]}" "${laufwerke[@]}"; } | sort | uniq -u)
 zahl_laufwerke="${#laufwerke2[@]}"
-echo neu erkannte Laufwerke "$zahl_laufwerke"
+
+
+echo neu erkannte Es gibt jetzt dieses neue serielle Blockdevice: "${laufwerke2[@]}"
+echo Laufwerke ${#laufwerke2[@]}
+
+echo lwo:"${laufwerke2[0]}"
+echo lw1:"${laufwerke2[1]}"
+
+
 if [ "$zahl_laufwerke" -eq 1 ]; then
 echo Es gibt jetzt dieses neue serielle Blockdevice: "${laufwerke2[0]}"
 else
@@ -109,11 +119,11 @@ if [ "$endgueltigja" == "y" ]; then
 # Quelle : https://askubuntu.com/questions/828545/using-dd-without-sudo
 
 # Wenn die nächsten 3 Zeilen aktiviert sind: "don't blame me!"
-umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
+#umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
 xz --keep --decompress raspi"$attribut".xz
 dd if=raspi"$attribut" of=/dev/"${laufwerke2[0]}" bs=4M conv=fsync status=progress || echo "Es gibt Probleme mit Schreibrechten.Ab Zeile 105 gibts Hilfe"
 echo "Tatatatah ! fertig"
-umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
+#umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
 else
 exit
 fi

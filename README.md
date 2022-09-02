@@ -1,6 +1,6 @@
 # Raspi-auto-downloader 
 
-# Achtung ! Nur teilweise getestet.
+.
 05.05.2022 Diese Version kann jetzt Images die mit xz gepackt wurden.
 
 
