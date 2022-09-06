@@ -1,7 +1,5 @@
 # Raspi-auto-downloader
 
-Jetzt Bashcode ist Shellchecked
-[![Trigger: Push action](https://github.com/dewomser/Raspi-auto-downloader/actions/workflows/main.yml/badge.svg)](https://github.com/dewomser/Raspi-auto-downloader/actions/workflows/main.yml)
 .
 05.05.2022 Diese Version kann jetzt Images die mit xz gepackt wurden.
 
