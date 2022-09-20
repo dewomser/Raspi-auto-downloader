@@ -18,7 +18,7 @@ Jetzt auch mit den 64er Images
 
 ## Copy and check SD-Image
 
-![alt text](https://github.com/dewomser/Raspi-auto-downloader/blob/main/bilder/copy.png "copy and check")
+![alt text](./bilder/copy.png "copy and check")
 
 ## Fork, Issue, Pull request, Clone
 Be carefull, this  script is in status Beta 0.2. !
