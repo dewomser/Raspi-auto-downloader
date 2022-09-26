@@ -114,6 +114,7 @@ read -r endgueltigja
 if [ "$endgueltigja" == "y" ]; then
 
 # Wenn die Karte nur als root gemountet werden kann, muss dd durch sudo dd ersetzt werden. umount -> sudo umount
+## sudo ddd – is now on
 # Alternative für Ubuntu:
 # echo 'KERNEL=="sd*", SUBSYSTEMS=="usb", MODE="0666"' | sudo tee /etc/udev/rules.d/99-usb-storage.rules
 # Quelle : https://askubuntu.com/questions/828545/using-dd-without-sudo
@@ -121,7 +122,7 @@ if [ "$endgueltigja" == "y" ]; then
 # Wenn die nächsten 3 Zeilen aktiviert sind: "don't blame me!"
 #umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
 xz --keep --decompress raspi"$attribut".xz
-dd if=raspi"$attribut" of=/dev/"${laufwerke2[0]}" bs=4M conv=fsync status=progress || echo "Es gibt Probleme mit Schreibrechten.Ab Zeile 105 gibts Hilfe"
+sudo dd if=raspi"$attribut" of=/dev/"${laufwerke2[0]}" bs=4M conv=fsync status=progress || echo "Es gibt Probleme mit Schreibrechten.Ab Zeile 105 gibts Hilfe"
 echo "Tatatatah ! fertig"
 #umount /dev/"${laufwerke2[0]}"[0-9] > /dev/null 2>&1
 else
