@@ -51,7 +51,7 @@ fi
 cd "$HOME/Downloads" || echo"Downloads Ordner nicht vorhanden"
 
 
-dirr=$(curl --silent https://downloads.raspberrypi.org/$rimage/images/ | grep -o -E "$rimage-$datum" | tail -1 )
+dirr=$(curl --silent "https://downloads.raspberrypi.org/$rimage/images/" | grep -o -E "$rimage-$datum" | tail -1 )
 pathr="https://downloads.raspberrypi.org/$rimage/images/$dirr/"
 #rname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:lower:]-]*\.zip" | head -1)
 #rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.xz" | head -1)
