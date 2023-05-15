@@ -55,7 +55,7 @@ dirr=$(curl --silent "https://downloads.raspberrypi.org/$rimage/images/" | grep 
 pathr="https://downloads.raspberrypi.org/$rimage/images/$dirr/"
 #rname=$(curl --silent "$pathr" | grep -o -E -w "$datum-[[:lower:]-]*\.zip" | head -1)
 #rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.xz" | head -1)
-rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.img.\xz"|tail -1)
+rname=$(curl --silent "$pathr" | grep -o -E "$datum-[[:alnum:]-]*\.img\.xz"|tail -1)
 
 wget -c "$pathr""$rname" -O "raspi$attribut".xz
 #echo Test kompletter Pfad :: "$pathr""$rname"
